@@ -75,13 +75,15 @@ class SiteController extends Controller
             return $this->goHome();
         }
 
+        $this->layout = "metronic/login";
+
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
         } else {
             $model->password = '';
 
-            return $this->render('login', [
+            return $this->render('login-metronic', [
                 'model' => $model,
             ]);
         }
@@ -99,6 +101,11 @@ class SiteController extends Controller
         return $this->goHome();
     }
 
+    /**
+     * Change password action.
+     *
+     * @return string|\yii\web\Response
+     */
     public function actionChangePassword(){
         if (Yii::$app->user->isGuest) {
             return $this->goHome();
