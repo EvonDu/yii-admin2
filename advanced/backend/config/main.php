@@ -7,6 +7,9 @@ $params = array_merge(
 );
 
 return [
+    'layout' => 'metronic/main',           //设置布局
+    //'defaultRoute'=>"user/user/index",   //默认控制器
+
     'id' => 'app-backend',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
