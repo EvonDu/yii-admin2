@@ -21,6 +21,7 @@ metronic\MetronicLoginAsset::register($this);
     </head>
     <body class="login">
         <?php $this->beginBody() ?>
+
         <div class="menu-toggler sidebar-toggler"></div>
         <div class="logo">
             <a href="index.html"> <img src="http://oq6uyj3ku.bkt.clouddn.com/admin_templet/metronic/assets/pages/img/logo-big.png" alt="" /> </a>
@@ -29,6 +30,7 @@ metronic\MetronicLoginAsset::register($this);
             <?= $content ?>
         </div>
         <div class="copyright"> 2014 © Metronic. Admin Dashboard Template. </div>
+        
         <?php $this->endBody() ?>
     </body>
 </html>
