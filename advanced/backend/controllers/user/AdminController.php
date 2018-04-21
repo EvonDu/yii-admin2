@@ -144,6 +144,11 @@ class AdminController extends Controller
         ]);
     }
 
+    /**
+     * Updates an existing AdminInfo model.
+     * @param $id
+     * @return string|\yii\web\Response
+     */
     public function actionInfo($id){
         $user = $this->findModel($id);
         $model = $user->getInfo();
