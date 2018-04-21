@@ -1,5 +1,7 @@
 <?php
 return [
+    'language'=>'zh-CN',            //设置语言
+    'timeZone' => 'Asia/Shanghai',  //设置时区
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
