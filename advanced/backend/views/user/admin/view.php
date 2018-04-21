@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model common\models\admin\Admin */
 
-$this->title = $model->username;
+$this->title = $model->info->nickname;
 $this->params['breadcrumbs'][] = ['label' => '系统用户', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -30,6 +30,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'username',
+            'adminInfo.nickname',
+            'adminInfo.phone',
             'auth_key',
             'password_hash',
             'password_reset_token',

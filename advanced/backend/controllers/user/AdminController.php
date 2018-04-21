@@ -144,6 +144,19 @@ class AdminController extends Controller
         ]);
     }
 
+    public function actionInfo($id){
+        $user = $this->findModel($id);
+        $model = $user->getInfo();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
+
+        return $this->render('info', [
+            'model' => $model,
+        ]);
+    }
+
     /**
      * Finds the Admin model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

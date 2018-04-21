@@ -23,13 +23,13 @@ use yii\helpers\Url;
                     <?php if (!Yii::$app->user->isGuest):?>
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                             <img alt="" class="img-circle" src="" />
-                            <span class="username username-hide-on-mobile"> <?=Yii::$app->user->identity->username ?> </span>
+                            <span class="username username-hide-on-mobile"> <?=Yii::$app->user->identity->info->nickname ?> </span>
                             <i class="fa fa-angle-down"></i>
                         </a>
                     <?php endif;?>
                     <?php if (Yii::$app->user->isGuest):?>
                         <a href="<?=Url::to(['site/login'])?>" class="dropdown-toggle">
-                            <span class="username username-hide-on-mobile" style="margin-right: 8px;"> <?=Yii::t('base', 'login_login')?> </span>
+                            <span class="username username-hide-on-mobile" style="margin-right: 8px;"> 登录 </span>
                         </a>
                     <?php endif;?>
                     <!-- 用户下拉部分 -->

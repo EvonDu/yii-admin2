@@ -20,6 +20,8 @@ use yii\web\IdentityInterface;
  * @property integer $created_at
  * @property integer $updated_at
  * @property string $password write-only password
+ *
+ * @property AdminInfo $adminInfo
  */
 class Admin extends ActiveRecord implements IdentityInterface
 {
@@ -204,5 +206,28 @@ class Admin extends ActiveRecord implements IdentityInterface
             'created_at' => '创建时间',
             'updated_at' => '修改时间',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAdminInfo()
+    {
+        return $this->hasOne(AdminInfo::className(), ['user_id' => 'id']);
+    }
+
+    /**
+     * 此方法区别于作为属性的adminInfo,当不存在adminInfo时,新建一个
+     * @return AdminInfo
+     */
+    public function getInfo(){
+        if($this->adminInfo)
+            return $this->adminInfo;
+        else{
+            $info = new AdminInfo();
+            $info->user_id = $this->id;
+            $info->nickname = $this->username;
+            return $info;
+        }
     }
 }
