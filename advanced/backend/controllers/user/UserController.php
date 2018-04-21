@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use common\models\user\SignupForm;
+use common\models\auth\RoleAssignForm;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -122,6 +123,23 @@ class UserController extends Controller
         }
 
         return $this->render('signup', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Assign role an existing User model.
+     * @param $id
+     * @return string|\yii\web\Response
+     */
+    public function actionAssign($id){
+        $model = new RoleAssignForm($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['index']);
+        }
+
+        return $this->render('assign', [
             'model' => $model,
         ]);
     }

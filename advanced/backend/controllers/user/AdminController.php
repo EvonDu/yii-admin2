@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use common\models\admin\SignupForm;
+use common\models\auth\RoleAssignForm;
 
 /**
  * AdminController implements the CRUD actions for Admin model.
@@ -122,6 +123,23 @@ class AdminController extends Controller
         }
 
         return $this->render('signup', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Assign role an existing Admin model.
+     * @param $id
+     * @return string|\yii\web\Response
+     */
+    public function actionAssign($id){
+        $model = new RoleAssignForm($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['index']);
+        }
+
+        return $this->render('assign', [
             'model' => $model,
         ]);
     }

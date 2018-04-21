@@ -8,10 +8,10 @@ use yii\helpers\ArrayHelper;
 /**
  * Auth assign form
  */
-class AuthAssignForm extends Model
+class RoleAssignForm extends Model
 {
-    public $role_id;    //这个role_id，其实为AuthItem的name属性
-    public $auths;
+    public $user_id;
+    public $roles;
     private $list;
 
     /**
@@ -19,13 +19,13 @@ class AuthAssignForm extends Model
      * @param array $role_id
      * @param array $config
      */
-    public function __construct($role_id, array $config = [])
+    public function __construct($id, array $config = [])
     {
-        //获取角色
-        $this->role_id = $role_id;
+        //获取用户
+        $this->user_id = $id;
         //获取拥有权限
-        $search = AuthItemChild::findAll(["parent"=>$role_id]);
-        $this->auths = ArrayHelper::getColumn($search, 'child');
+        $search = AuthAssignment::findAll(['user_id'=>$id]);
+        $this->roles = ArrayHelper::getColumn($search, 'item_name');
 
         parent::__construct($config);
     }
@@ -36,7 +36,7 @@ class AuthAssignForm extends Model
     public function rules()
     {
         return [
-            [['auths'], 'safe'],
+            [['roles'], 'safe'],
         ];
     }
 
@@ -44,13 +44,14 @@ class AuthAssignForm extends Model
      * @return bool
      */
     public function save(){
-        if($this->role_id){
-            AuthItemChild::deleteAll(["parent"=>$this->role_id]);
-            if(is_array($this->auths)){
-                foreach ($this->auths as $auth){
-                    $item = new AuthItemChild();
-                    $item->parent = $this->role_id;
-                    $item->child = $auth;
+        if($this->user_id){
+            AuthAssignment::deleteAll(["user_id"=>$this->user_id]);
+            if(is_array($this->roles)){
+                foreach ($this->roles as $role){
+                    $item = new AuthAssignment();
+                    $item->user_id = $this->user_id;
+                    $item->item_name = $role;
+                    $item->created_at = time();
                     $item->save();
                 }
             }
@@ -64,8 +65,8 @@ class AuthAssignForm extends Model
     public function attributeLabels()
     {
         return [
-            'role_id' => '角色ID',
-            'auths' => '权限列表',
+            'user_id' => '用户ID',
+            'roles' => '用户角色',
         ];
     }
 
@@ -74,7 +75,7 @@ class AuthAssignForm extends Model
      */
     public function getList(){
         if(empty($this->list)){
-            $search = AuthItem::findAll(['type'=>"2"]);
+            $search = AuthItem::findAll(['type'=>"1"]);
             $this->list = ArrayHelper::map($search, 'name', 'description');
         }
 
