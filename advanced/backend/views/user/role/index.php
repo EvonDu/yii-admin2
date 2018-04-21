@@ -30,7 +30,15 @@ $this->params['breadcrumbs'][] = $this->title;
             ['attribute' => 'created_at', 'value'=> function($model){return  date('Y-m-d H:i:s',$model->created_at);},],
             ['attribute' => 'updated_at', 'value'=> function($model){return  date('Y-m-d H:i:s',$model->updated_at);},],
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{view} {update} {delete} {assign}',
+                'buttons' => [
+                    'assign' => function ($url, $model, $key) {
+                        return !empty($model)?Html::a('<span class="glyphicon glyphicon-lock"></span>', $url, ['title' => '分配权限'] ) : '';
+                    },
+                ],
+            ],
         ],
     ]); ?>
 </div>

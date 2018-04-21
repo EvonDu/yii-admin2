@@ -5,11 +5,11 @@ namespace backend\controllers\user;
 use Yii;
 use common\models\auth\AuthItem;
 use common\models\auth\AuthItemSearch;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use common\models\user\User;
-use common\models\auth\RoleAssignForm;
+use common\models\auth\AuthAssignForm;
 
 /**
  * AuthItemController implements the CRUD actions for AuthItem model.
@@ -111,6 +111,23 @@ class RoleController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    /**
+     * Assign auth an existing AuthItem model.
+     * @param $id
+     * @return string|\yii\web\Response
+     */
+    public function actionAssign($id){
+        $model = new AuthAssignForm($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['index']);
+        }
+
+        return $this->render('assign', [
+            'model' => $model,
+        ]);
     }
 
     /**
