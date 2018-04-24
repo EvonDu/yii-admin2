@@ -16,7 +16,7 @@ use yii\helpers\Url;
         <div class="top-menu">
             <ul class="nav navbar-nav pull-right">
                 <!-- 其他部分 -->
-                <?php require "header-other.php";?>
+                <?php /*require "header-other.php";*/?>
                 <!-- 用户部分 -->
                 <li class="dropdown dropdown-user">
                     <!-- 用户信息部分 -->
@@ -35,7 +35,7 @@ use yii\helpers\Url;
                     <!-- 用户下拉部分 -->
                     <ul class="dropdown-menu dropdown-menu-default">
                         <li>
-                            <a href="<?=Url::to(["user/route/user",'id'=>Yii::$app->user->identity->id])?>">
+                            <a href="<?=Url::to(["user/admin/view",'id'=>Yii::$app->user->identity->id])?>">
                                 <i class="icon-user"></i> 用户资料
                             </a>
                         </li>

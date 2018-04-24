@@ -6,12 +6,15 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use metronic\widgets\Portlet;
+use metronic\widgets\Button;
 
 $this->title = '修改密码';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-signup">
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="site-signup row">
+
+    <?php Portlet::begin(["title"=>Html::encode($this->title), "icon"=>'glyphicon glyphicon-refresh']);?>
 
     <p>请填写以下信息：</p>
 
@@ -32,4 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php ActiveForm::end(); ?>
         </div>
     </div>
+
+    <?php Portlet::end();?>
+
 </div>

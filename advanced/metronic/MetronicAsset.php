@@ -43,6 +43,7 @@ class MetronicAsset extends AssetBundle //需要继承AssetBundle类
         "http://oq6uyj3ku.bkt.clouddn.com/admin_templet/metronic/assets/global/scripts/app.min.js",
         "http://oq6uyj3ku.bkt.clouddn.com/admin_templet/metronic/assets/layouts/global/scripts/quick-sidebar.min.js",
         "http://oq6uyj3ku.bkt.clouddn.com/admin_templet/metronic/assets/layouts/layout/scripts/layout.min.js",
+        "http://oq6uyj3ku.bkt.clouddn.com/admin_templet/metronic/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js",
 
         //弹窗
         "http://oq6uyj3ku.bkt.clouddn.com/admin_templet/metronic/assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js",

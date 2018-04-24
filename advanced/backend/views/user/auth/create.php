@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use metronic\widgets\Portlet;
 
 
 /* @var $this yii\web\View */
@@ -10,12 +11,14 @@ $this->title = '添加权限';
 $this->params['breadcrumbs'][] = ['label' => '权限管理', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="auth-item-create">
+<div class="auth-item-create row">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <?php Portlet::begin(["title"=>Html::encode($this->title), "icon"=>'glyphicon glyphicon-plus' ]);?>
 
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
+
+    <?php Portlet::end();?>
 
 </div>

@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use metronic\widgets\Portlet;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\user\User */
@@ -10,12 +11,14 @@ $this->params['breadcrumbs'][] = ['label' => '用户管理', 'url' => ['index']]
 $this->params['breadcrumbs'][] = ['label' => $model->username, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = '更新';
 ?>
-<div class="user-update">
+<div class="user-update row">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <?php Portlet::begin(["title"=>Html::encode($this->title), "icon"=>'glyphicon glyphicon-pencil' ]);?>
 
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
+
+    <?php Portlet::end();?>
 
 </div>

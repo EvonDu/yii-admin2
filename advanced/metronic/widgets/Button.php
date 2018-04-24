@@ -98,6 +98,9 @@ class Button extends MetronicWidget
                 Html::addCssClass($this->options, "btn-sm");
                 break;
         }
+        if($this->size != self::SIZE_NORMAL){
+            Html::addCssClass($this->options, "btn-".$this->size);
+        }
 
         $icon = empty($this->icon)?"":Html::tag("i","",["class"=>$this->icon]);
         $content = empty($icon)?$this->text:"$this->text $icon";

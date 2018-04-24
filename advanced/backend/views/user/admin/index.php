@@ -1,7 +1,9 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use metronic\widgets\Portlet;
+use metronic\widgets\GridView;
+use metronic\widgets\Button;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\admin\AdminSearch */
@@ -10,14 +12,22 @@ use yii\grid\GridView;
 $this->title = '系统用户';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="admin-index">
+<div class="admin-index row">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php Portlet::begin(["title"=>Html::encode($this->title), "icon"=>'glyphicon glyphicon-th-list']);?>
 
-    <p>
-        <?= Html::a('创建用户', ['signup'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <div class="form-actions">
+        <?= Button::widget([
+            "tag"=>Button::TAG_A,
+            "url"=>['signup'],
+            "text"=>'创建用户',
+            "icon"=>"fa fa-plus",
+            "sbold"=>true,
+            "color"=>Button::COLOR_GREEN
+        ])?>
+    </div><br>
+
+    <?= $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -33,17 +43,52 @@ $this->params['breadcrumbs'][] = $this->title;
             ['attribute' => 'updated_at', 'value'=> function($model){return  date('Y-m-d H:i:s',$model->updated_at);},],
 
             [
-                'class' => 'yii\grid\ActionColumn',
+                'class' => 'metronic\widgets\ActionColumn',
                 'template' => '{view} {info} {delete} {assign}',
                 'buttons' => [
                     'info' => function ($url, $model, $key) {
-                        return !empty($model)?Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, ['title' => '用户信息'] ) : '';
+                        $button = Button::widget([
+                            "tag"=>Button::TAG_A,
+                            "url"=>$url,
+                            "text"=>Yii::t('yii', 'Update'),
+                            "icon"=>"glyphicon glyphicon-pencil",
+                            "sbold"=>true,
+                            "circle"=>true,
+                            "outline"=>true,
+                            "color"=>Button::COLOR_GREEN,
+                            "size"=>Button::SIZE_EXTRA_SMALL,
+                            "options"=>[
+                                'title' => Yii::t('yii', 'Update'),
+                                'aria-label' => Yii::t('yii', 'Update'),
+                                'data-pjax' => '0',
+                            ]
+                        ]);
+                        return $button;
                     },
                     'assign' => function ($url, $model, $key) {
-                        return !empty($model)?Html::a('<span class="glyphicon glyphicon-user"></span>', $url, ['title' => '分配角色'] ) : '';
+                        $button = Button::widget([
+                            "tag"=>Button::TAG_A,
+                            "url"=>$url,
+                            "text"=>'角色',
+                            "icon"=>"glyphicon glyphicon-user",
+                            "sbold"=>true,
+                            "circle"=>true,
+                            "outline"=>true,
+                            "color"=>Button::COLOR_PURPLE_MINT,
+                            "size"=>Button::SIZE_EXTRA_SMALL,
+                            "options"=>[
+                                'title' => '角色',
+                                'aria-label' => '角色',
+                                'data-pjax' => '0',
+                            ]
+                        ]);
+                        return $button;
                     },
                 ],
             ],
         ],
     ]); ?>
+
+    <?php Portlet::end();?>
+
 </div>

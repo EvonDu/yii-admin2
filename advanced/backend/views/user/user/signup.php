@@ -6,13 +6,16 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use metronic\widgets\Portlet;
+use metronic\widgets\Button;
 
 $this->title = '用户注册';
 $this->params['breadcrumbs'][] = ['label' => '用户管理', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-signup">
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="site-signup row">
+
+    <?php Portlet::begin(["title"=>Html::encode($this->title), "icon"=>'glyphicon glyphicon-plus']);?>
 
     <p>请填写以下信息进行注册:</p>
 
@@ -20,17 +23,20 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-lg-5">
             <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
 
-                <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
+            <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
 
-                <?= $form->field($model, 'email') ?>
+            <?= $form->field($model, 'email') ?>
 
-                <?= $form->field($model, 'password')->passwordInput() ?>
+            <?= $form->field($model, 'password')->passwordInput() ?>
 
-                <div class="form-group">
-                    <?= Html::submitButton('注册', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
-                </div>
+            <div class="form-group">
+                <?= Button::widget(["text"=>'注册',"tag"=>Button::TAG_SUBMIT, "icon"=>"glyphicon glyphicon-plus", "color"=>Button::COLOR_BLUE,]);?>
+            </div>
 
             <?php ActiveForm::end(); ?>
         </div>
     </div>
+
+    <?php Portlet::end();?>
+
 </div>

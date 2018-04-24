@@ -1,7 +1,9 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use metronic\widgets\Portlet;
+use metronic\widgets\GridView;
+use metronic\widgets\Button;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\auth\AuthItemSearch */
@@ -10,14 +12,22 @@ use yii\grid\GridView;
 $this->title = '权限管理';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="auth-item-index">
+<div class="auth-item-index row">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php Portlet::begin(["title"=>Html::encode($this->title), "icon"=>'glyphicon glyphicon-th-list']);?>
 
-    <p>
-        <?= Html::a('添加权限', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <div class="form-actions">
+        <?= Button::widget([
+            "tag"=>Button::TAG_A,
+            "url"=>['create'],
+            "text"=>'创建权限',
+            "icon"=>"fa fa-plus",
+            "sbold"=>true,
+            "color"=>Button::COLOR_GREEN
+        ])?>
+    </div><br>
+
+    <?= $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -31,7 +41,10 @@ $this->params['breadcrumbs'][] = $this->title;
             ['attribute' => 'created_at', 'value'=> function($model){return  date('Y-m-d H:i:s',$model->created_at);},],
             ['attribute' => 'updated_at', 'value'=> function($model){return  date('Y-m-d H:i:s',$model->updated_at);},],
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'metronic\widgets\ActionColumn'],
         ],
     ]); ?>
+
+    <?php Portlet::end();?>
+
 </div>
