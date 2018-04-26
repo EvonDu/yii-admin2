@@ -1,9 +1,9 @@
 <?php
 
 use yii\helpers\Html;
+use metronic\widgets\Button;
 use metronic\widgets\Portlet;
 use metronic\widgets\GridView;
-use metronic\widgets\Button;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\admin\AdminSearch */

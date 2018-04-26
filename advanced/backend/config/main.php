@@ -7,14 +7,28 @@ $params = array_merge(
 );
 
 return [
-    'layout' => 'metronic/main',           //设置布局
-    //'defaultRoute'=>"user/user/index",   //默认控制器
+    'layout' => 'metronic/main',            //设置布局
+    //'defaultRoute'=>"user/user/index",    //默认控制器
 
     'id' => 'app-backend',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
-    'modules' => [],
+    'modules' => [
+        'gii'=>[                            //配置GII
+            'class' => 'yii\gii\Module',
+            'generators' => [
+                //配置生成器
+                'crud' => [
+                    'class' => 'yii\gii\generators\crud\Generator',
+                    'templates' => [
+                        //模板名 => 模板路径
+                        'metronic' => '@metronic/gii-template/curd',
+                    ]
+                ]
+            ],
+        ]
+    ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',
