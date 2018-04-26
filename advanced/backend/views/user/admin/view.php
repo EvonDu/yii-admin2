@@ -29,6 +29,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
+            [
+                'attribute'=>'adminInfo.picture',
+                'format' => 'raw',
+                'value' => function($model){return Html::img($model->adminInfo->picture,['style'=>'width: 100px;']);}
+            ],
             'username',
             'adminInfo.nickname',
             'adminInfo.phone',
