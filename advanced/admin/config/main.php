@@ -7,6 +7,9 @@ $params = array_merge(
 );
 
 return [
+    'layout' => 'beginner/page',        //设置布局
+    //'defaultRoute'=>"site/home",        //默认控制器
+
     'id' => 'app-admin',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'admin\controllers',
@@ -17,7 +20,7 @@ return [
             'csrfParam' => '_csrf-admin',
         ],
         'user' => [
-            'identityClass' => 'common\models\User',
+            'identityClass' => 'common\models\admin\Admin',
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-admin', 'httpOnly' => true],
         ],

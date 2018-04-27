@@ -26,7 +26,7 @@ class SiteController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'index'],
+                        'actions' => ['logout', 'index', 'home'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -60,6 +60,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        $this->layout = "beginner/layout";
         return $this->render('index');
     }
 
@@ -96,5 +97,15 @@ class SiteController extends Controller
         Yii::$app->user->logout();
 
         return $this->goHome();
+    }
+
+    /**
+     * Displays homepage.
+     *
+     * @return string
+     */
+    public function actionHome()
+    {
+        return $this->render('home');
     }
 }
