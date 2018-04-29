@@ -7,14 +7,28 @@ $params = array_merge(
 );
 
 return [
-    'layout' => 'beginner/page',        //设置布局
+    'layout' => 'layui/page',        //设置布局
     //'defaultRoute'=>"site/home",        //默认控制器
 
     'id' => 'app-admin',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'admin\controllers',
     'bootstrap' => ['log'],
-    'modules' => [],
+    'modules' => [
+        'gii'=>[                            //配置GII
+            'class' => 'yii\gii\Module',
+            'generators' => [
+                //配置生成器
+                'crud' => [
+                    'class' => 'yii\gii\generators\crud\Generator',
+                    'templates' => [
+                        //模板名 => 模板路径
+                        'layui' => '@layui/gii-template/curd',
+                    ]
+                ]
+            ],
+        ]
+    ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-admin',

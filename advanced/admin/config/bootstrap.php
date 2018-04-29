@@ -1,2 +1,2 @@
 <?php
-Yii::setAlias('@beginner', dirname(__DIR__) . '/beginner');
+Yii::setAlias('@layui', dirname(__DIR__) . '/layui');

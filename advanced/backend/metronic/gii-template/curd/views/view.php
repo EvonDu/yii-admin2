@@ -26,8 +26,8 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-view row">
 
     <?= "<?php " ?>Portlet::begin(["title"=>Html::encode($this->title), "icon"=>'glyphicon glyphicon-eye-open','actions'=> [
-        ["text"=>"更新", "icon"=>'glyphicon glyphicon-pencil', "color"=>Button::COLOR_GREEN, "url"=>['update', 'id' => $model->id]],
-        ["text"=>"删除" ,"icon"=>'glyphicon glyphicon-trash', "color"=>Button::COLOR_RED, "url"=>['delete', 'id' => $model->id], 'options'=>[
+        ["text"=>"更新", "icon"=>'glyphicon glyphicon-pencil', "color"=>Button::COLOR_GREEN, "url"=>['update', <?= $urlParams ?>]],
+        ["text"=>"删除" ,"icon"=>'glyphicon glyphicon-trash', "color"=>Button::COLOR_RED, "url"=>['delete', <?= $urlParams ?>], 'options'=>[
             'data'=>[
                 'confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
                 'method' => 'post',
