@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= Button::widget([
             "text"=>"添加",
-            "icon"=>"&#xe608;",
+            "icon"=>"&#xe654;",
             "size"=>Button::SIZE_SM,
             "tag"=>Button::TAG_A,
             "url"=>['signup'],
@@ -51,11 +51,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'buttons' => [
                     'info' => function ($url, $model, $key) {
                         return Button::widget([
-                            "text"=>Yii::t('yii', 'Update'),
-                            //"icon"=>"&#xe642;",
+                            //"text"=>Yii::t('yii', 'Update'),
+                            "icon"=>"&#xe642;",
+                            "tag"=>Button::TAG_A,
                             "size"=>Button::SIZE_SM,
                             "theme"=>Button::THEME_NORMAL,
-                            "tag"=>Button::TAG_A,
                             "url"=>$url,
                             "options"=>[
                                 'title' => Yii::t('yii', 'Update'),
@@ -66,11 +66,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     },
                     'assign' => function ($url, $model, $key) {
                         return Button::widget([
-                            "text"=>"角色",
-                            //"icon"=>"&#xe642;",
+                            //"text"=>"角色",
+                            "icon"=>"&#xe612;",
+                            "tag"=>Button::TAG_A,
                             "size"=>Button::SIZE_SM,
                             "theme"=>Button::THEME_PRIMARY,
-                            "tag"=>Button::TAG_A,
                             "url"=>$url,
                             "options"=>[
                                 'title' => "角色",

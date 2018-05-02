@@ -14,6 +14,7 @@ echo "<?php\n";
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use layui\widgets\Card;
+use layui\widgets\Button;
 use layui\widgets\Blockquote;
 
 /* @var $this yii\web\View */
@@ -29,16 +30,30 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= "<?php " ?>Blockquote::begin()?>
 
-    <p>
-        <?= "<?= " ?>Html::a('更新', ['update', <?= $urlParams ?>], ['class' => 'btn btn-primary']) ?>
-        <?= "<?= " ?>Html::a('删除', ['delete', <?= $urlParams ?>], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
-                'method' => 'post',
-            ],
+    <div class="layui-btn-group">
+        <?= "<?= " ?>Button::widget([
+            "text"=><?= $generator->generateString('Update') ?>,
+            "icon"=>'&#xe642;',
+            "tag"=>Button::TAG_A,
+            "size"=>Button::SIZE_SM,
+            "theme"=>Button::THEME_NORMAL,
+            "url"=>['update', <?= $urlParams ?>],
         ]) ?>
-    </p>
+        <?= "<?= " ?>Button::widget([
+            "text"=><?= $generator->generateString('Delete') ?>,
+            "icon"=>'&#xe640;',
+            "tag"=>Button::TAG_A,
+            "size"=>Button::SIZE_SM,
+            "theme"=>Button::THEME_DANGER,
+            "url"=>['delete', <?= $urlParams ?>],
+            "options"=>[
+                'data' => [
+                    'confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
+                    'method' => 'post',
+                ],
+            ]
+        ]) ?>
+    </div>
 
     <?= "<?php " ?>Blockquote::end()?>
 

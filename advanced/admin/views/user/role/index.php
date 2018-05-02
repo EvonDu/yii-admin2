@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= Button::widget([
         "text"=>"添加",
-        "icon"=>"&#xe608;",
+        "icon"=>"&#xe654;",
         "size"=>Button::SIZE_SM,
         "tag"=>Button::TAG_A,
         "url"=>['create'],
@@ -46,11 +46,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'buttons' => [
                     'assign' => function ($url, $model, $key) {
                         return Button::widget([
-                            "text"=>"权限",
-                            //"icon"=>"&#xe642;",
+                            //"text"=>"权限",
+                            "icon"=>"&#xe614;",
+                            "tag"=>Button::TAG_A,
                             "size"=>Button::SIZE_SM,
                             "theme"=>Button::THEME_PRIMARY,
-                            "tag"=>Button::TAG_A,
                             "url"=>$url,
                             "options"=>[
                                 'title' => "权限",

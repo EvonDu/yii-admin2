@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= Button::widget([
         "text"=>"添加",
-        "icon"=>"&#xe608;",
+        "icon"=>"&#xe654;",
         "size"=>Button::SIZE_SM,
         "tag"=>Button::TAG_A,
         "url"=>['create'],

@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="auth-item-create row">
 
-    <?php Card::begin(["title"=>Html::encode($this->title),"icon"=>"&#xe613;"])?>
+    <?php Card::begin(["title"=>Html::encode($this->title),"icon"=>"&#xe612;"])?>
 
     <div class="auth-assign-form">
 

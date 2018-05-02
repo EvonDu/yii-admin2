@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use layui\widgets\Card;
+use layui\widgets\Button;
 use layui\widgets\Blockquote;
 
 /* @var $this yii\web\View */
@@ -18,16 +19,30 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php Blockquote::begin()?>
 
-    <p>
-        <?= Html::a('更新', ['update', 'id' => $model->name], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('删除', ['delete', 'id' => $model->name], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
-                'method' => 'post',
-            ],
+    <div class="layui-btn-group">
+        <?= Button::widget([
+            "text"=>'更新',
+            "icon"=>'&#xe642;',
+            "tag"=>Button::TAG_A,
+            "size"=>Button::SIZE_SM,
+            "theme"=>Button::THEME_NORMAL,
+            "url"=>['update', 'id' => $model->name],
         ]) ?>
-    </p>
+        <?= Button::widget([
+            "text"=>'删除',
+            "icon"=>'&#xe640;',
+            "tag"=>Button::TAG_A,
+            "size"=>Button::SIZE_SM,
+            "theme"=>Button::THEME_DANGER,
+            "url"=>['delete', 'id' => $model->name],
+            "options"=>[
+                'data' => [
+                    'confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
+                    'method' => 'post',
+                ],
+            ]
+        ]) ?>
+    </div>
 
     <?php Blockquote::end()?>
 

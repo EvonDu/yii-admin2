@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= "<?= " ?>Button::widget([
         "text"=>'<?='Create ' . Inflector::camel2words(StringHelper::basename($generator->modelClass))?>',
-        "icon"=>"&#xe608;",
+        "icon"=>"&#xe654;",
         "size"=>Button::SIZE_SM,
         "tag"=>Button::TAG_A,
         "url"=>['create'],
