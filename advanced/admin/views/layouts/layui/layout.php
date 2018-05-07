@@ -6,7 +6,7 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 use admin\nav\Nav;
-use backend\assets\AppAsset;
+use admin\assets\AppAsset;
 use layui\BeginnerAsset;
 
 AppAsset::register($this);

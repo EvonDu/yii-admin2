@@ -7,15 +7,15 @@ $params = array_merge(
 );
 
 return [
-    'layout' => 'layui/page',        //设置布局
-    //'defaultRoute'=>"site/home",        //默认控制器
+    'layout' => 'layui/page',           //设置布局
+    //'defaultRoute'=>"site/home",      //默认控制器
 
     'id' => 'app-admin',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'admin\controllers',
     'bootstrap' => ['log'],
     'modules' => [
-        'gii'=>[                            //配置GII
+        'gii'=>[                        //配置GII
             'class' => 'yii\gii\Module',
             'generators' => [
                 //配置生成器

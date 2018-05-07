@@ -3,14 +3,10 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-use backend\assets\AppAsset;
-use yii\helpers\Html;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
+use admin\assets\AppAsset;
 use common\widgets\Alert;
+use yii\helpers\Html;
 use layui\LayuiAsset;
-use layui\widgets\Breadcrumbs;
-use layui\widgets\Button;
 
 AppAsset::register($this);
 LayuiAsset::register($this);

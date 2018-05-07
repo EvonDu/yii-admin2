@@ -43,7 +43,11 @@ return [
                 [
                     'class' => 'yii\rest\UrlRule',
                     'pluralize' => false,
-                    'controller' => ['user']
+                    'controller' => ['v1/user'],
+                    'extraPatterns' => [
+                        //'GET user/<id>' => 'user'
+                    ],
+
                 ],
             ],
         ],
