@@ -20,6 +20,14 @@ class UploadController extends Controller
     /**
      * @inheritdoc
      */
+    public function uploadPath(){
+        return "upload";
+        //return dirname(Yii::getAlias("@admin"))."/upload";
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function behaviors()
     {
         return [
@@ -39,7 +47,7 @@ class UploadController extends Controller
     {
         if (isset($_FILES['file'])) {
             $file = $_FILES['file'];
-            $path = Upload::upload_file($file);
+            $path = Upload::upload_file($file,$this->uploadPath());
             Upload::sentApiResult(0,"",$path);
         }
         else{
@@ -54,11 +62,27 @@ class UploadController extends Controller
     public function actionBase64(){
         if (isset($_POST['base64'])) {
             $base64 = $_POST['base64'];
-            $path = Upload::upload_base64($base64);
+            $path = Upload::upload_base64($base64,$this->uploadPath());
             Upload::sentApiResult(0,"",$path);
         }
         else{
             Upload::sentApiResult(0,"image could not be saved.",null);
         }
+    }
+
+    /**
+     * 读取文件资源
+     * @param null $src
+     * @throws NotFoundHttpException
+     */
+    public function actionGet($src = null){
+        $fullname = $this->uploadPath()."/$src";
+        if(!file_exists($fullname))
+            throw new \yii\web\NotFoundHttpException('file not found');
+
+        $response = Yii::$app->getResponse();
+        $response->headers->set('Content-Type', mime_content_type($fullname));
+        $response->format = yii\web\Response::FORMAT_RAW;
+        $response->stream = fopen($fullname, 'r');
     }
 }
