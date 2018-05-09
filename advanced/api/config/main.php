@@ -11,6 +11,11 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'api\controllers',
+    'modules' => [
+        'v1' => [
+            'class' => 'api\modules\v1\Module',
+        ],
+    ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-api',
@@ -30,7 +35,7 @@ return [
                 }
                 else {
                     $code = $response->statusCode;
-                    $message = $response->data["message"];
+                    $message = isset($response->data["message"])?$response->data["message"]:"";
                     $data = null;
                 }
                 //自定义返回结构
@@ -77,7 +82,7 @@ return [
                         'POST info/<id>' => 'info-update'
                     ],
 
-                ],
+                ]
             ],
         ],
 

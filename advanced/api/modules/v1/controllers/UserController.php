@@ -1,10 +1,8 @@
 <?php
-namespace api\controllers\v1;
+namespace api\modules\v1\controllers;
 
 use Yii;
-use yii\base\Event;
 use yii\rest\ActiveController;
-use yii\web\Response;
 use yii\helpers\ArrayHelper;
 use yii\web\NotFoundHttpException;
 use yii\web\BadRequestHttpException;
