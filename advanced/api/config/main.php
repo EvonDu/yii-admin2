@@ -15,6 +15,34 @@ return [
         'request' => [
             'csrfParam' => '_csrf-api',
         ],
+        //配置RESTful返回格式
+        'response' => [
+            'class' => 'yii\web\Response',
+            'on beforeSend' => function ($event) {
+                //获取设置response
+                $response = $event->sender;
+                $response->format = yii\web\Response::FORMAT_JSON;
+                //处理返回信息
+                if ($response->isSuccessful) {
+                    $code = 0;
+                    $message = "Success";
+                    $data = $response->data;
+                }
+                else {
+                    $code = $response->statusCode;
+                    $message = $response->data["message"];
+                    $data = null;
+                }
+                //自定义返回结构
+                $response->data = [
+                    'state' =>  [
+                        'code' => $code,
+                        'message' => $message,
+                    ],
+                    'data' => $data,
+                ];
+            },
+        ],
         'user' => [
             'identityClass' => 'common\models\user\User',
             'enableAutoLogin' => true,
