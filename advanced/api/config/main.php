@@ -78,8 +78,8 @@ return [
                     'pluralize' => false,
                     'controller' => ['v1/user'],
                     'extraPatterns' => [
-                        'GET info/<id>' => 'info',
-                        'POST info/<id>' => 'info-update'
+                        'GET info/<id:\d+>' => 'info',
+                        'POST info/<id:\d+>' => 'info-update'
                     ],
 
                 ]
