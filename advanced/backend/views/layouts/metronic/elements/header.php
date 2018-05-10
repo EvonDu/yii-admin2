@@ -22,7 +22,7 @@ use yii\helpers\Url;
                     <!-- 用户信息部分 -->
                     <?php if (!Yii::$app->user->isGuest):?>
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                            <img alt="" class="img-circle" src="<?=Yii::$app->user->identity->info->picture ?>" />
+                            <img alt="" class="img-circle" src="<?= yii\helpers\Url::to(['/upload/get','src'=>Yii::$app->user->identity->info->picture]) ?>" />
                             <span class="username username-hide-on-mobile"> <?=Yii::$app->user->identity->info->nickname ?> </span>
                             <i class="fa fa-angle-down"></i>
                         </a>

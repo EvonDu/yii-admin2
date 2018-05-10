@@ -154,7 +154,7 @@ class AdminController extends Controller
         $model = $user->getInfo();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $user->id]);
         }
 
         return $this->render('info', [

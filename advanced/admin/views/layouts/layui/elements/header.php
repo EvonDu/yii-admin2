@@ -31,7 +31,7 @@ use yii\helpers\Html;
             <?php if (!Yii::$app->user->isGuest):?>
                 <li class="layui-nav-item">
                     <a href="javascript:;" class="admin-header-user">
-                        <img src="<?= Yii::$app->user->identity->info->picture ?>" />
+                        <img src="<?= yii\helpers\Url::to(['/upload/get','src'=>Yii::$app->user->identity->info->picture]) ?>" />
                         <span><?= Yii::$app->user->identity->info->nickname ?></span>
                     </a>
                     <dl class="layui-nav-child">

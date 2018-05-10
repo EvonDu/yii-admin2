@@ -53,6 +53,7 @@ advanced
         views/              前端视图目录
         web/                前端Web根目录
         widgets/            前端小部件目录
+    upload/                 文件上传目录
     vendor/                 composer依赖包目录
 ```
 

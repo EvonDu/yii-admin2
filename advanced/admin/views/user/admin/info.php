@@ -23,7 +23,8 @@ $this->params['breadcrumbs'][] = '更新';
         <?= $form->field($model, 'picture')->other('common\widgets\fileinput\ImageInput', [
             'template'=>'{input}',
             'uploadPath'=>yii\helpers\Url::to(['/upload/base64']),
-            'uploadType'=>'base64'
+            'uploadType'=>'base64',
+            'basePath'=>yii\helpers\Url::to(['/upload/get','src'=>''])
         ]) ?>
 
         <?= $form->field($model, 'nickname')->textInput() ?>

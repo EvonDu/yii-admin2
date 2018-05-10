@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute'=>'adminInfo.picture',
                 'format' => 'raw',
-                'value' => function($model){return Html::img($model->adminInfo->picture,['style'=>'width: 100px;']);}
+                'value' => function($model){return isset($model->adminInfo->picture)?Html::img(yii\helpers\Url::to(['/upload/get','src'=>$model->adminInfo->picture]),['style'=>'width: 100px;']):null;}
             ],
             'username',
             'adminInfo.nickname',

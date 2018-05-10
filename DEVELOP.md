@@ -125,3 +125,8 @@
 - 参考backend应用，配置admin应用。
 - 采用beginner做为layout模板。
 - 采用layui做为UI库。
+
+### 17、统合上传目录
+- 修改upload控制器，添加读取文件的get方法。
+- 把上传目录设置为根目录下的`uoload`文件夹。
+- 所有读取上传文件的方式，改为通过upload控制的get方法读取。

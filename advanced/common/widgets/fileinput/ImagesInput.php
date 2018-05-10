@@ -8,13 +8,14 @@ use yii\helpers\Html;
 class ImagesInput extends Widget
 {
     //参数
-    public $model;                       //绑定模型
-    public $attribute;                   //绑定字段名
-    public $uploadPath = '';             //上传地址
-    public $label = "";                  //绑定字段的label
-    public $uploadType = 'normal';       //上传方式 normal/base64
-    public $itemWidth = 96;              //宽度
-    public $itemHeight = 96;             //高度
+    public $model;                      //绑定模型
+    public $attribute;                  //绑定字段名
+    public $uploadPath = '';            //上传地址
+    public $label = "";                 //绑定字段的label
+    public $uploadType = 'normal';      //上传方式 normal/base64
+    public $itemWidth = 96;             //宽度
+    public $itemHeight = 96;            //高度
+    public $basePath = "";              //基础路径
     public $template = '{input}';
     //变量
     private $id;
@@ -58,7 +59,7 @@ class ImagesInput extends Widget
             'role'=>'images-input',
             'data-item-width'=>$this->itemWidth,
             'data-item-height'=>$this->itemHeight,
-            'data-base-url'=>\yii\helpers\Url::to('@web',true),
+            'data-base-url'=>empty($this->basePath)?\yii\helpers\Url::to('@web',true):$this->basePath,
             'data-upload-url'=>$this->uploadPath,
             'data-upload-type'=>$this->uploadType
         ];

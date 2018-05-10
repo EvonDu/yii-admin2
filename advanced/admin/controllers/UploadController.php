@@ -21,8 +21,8 @@ class UploadController extends Controller
      * @inheritdoc
      */
     public function uploadPath(){
-        return "upload";
-        //return dirname(Yii::getAlias("@admin"))."/upload";
+        //return "upload";
+        return Yii::getAlias("@upload");
     }
 
     /**
@@ -47,8 +47,8 @@ class UploadController extends Controller
     {
         if (isset($_FILES['file'])) {
             $file = $_FILES['file'];
-            $path = Upload::upload_file($file,$this->uploadPath());
-            Upload::sentApiResult(0,"",$path);
+            list($path,$src) = Upload::upload_file($file,$this->uploadPath());
+            Upload::sentApiResult(0,"",$src);
         }
         else{
             Upload::sentApiResult(0,"image could not be saved.",null);
@@ -62,8 +62,8 @@ class UploadController extends Controller
     public function actionBase64(){
         if (isset($_POST['base64'])) {
             $base64 = $_POST['base64'];
-            $path = Upload::upload_base64($base64,$this->uploadPath());
-            Upload::sentApiResult(0,"",$path);
+            list($path,$src) = Upload::upload_base64($base64,$this->uploadPath());
+            Upload::sentApiResult(0,"",$src);
         }
         else{
             Upload::sentApiResult(0,"image could not be saved.",null);
@@ -77,7 +77,7 @@ class UploadController extends Controller
      */
     public function actionGet($src = null){
         $fullname = $this->uploadPath()."/$src";
-        if(!file_exists($fullname))
+        if(!file_exists($fullname) || is_dir($fullname))
             throw new \yii\web\NotFoundHttpException('file not found');
 
         $response = Yii::$app->getResponse();

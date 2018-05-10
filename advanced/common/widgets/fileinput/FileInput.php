@@ -8,12 +8,13 @@ use yii\helpers\Html;
 class FileInput extends Widget
 {
     //参数
-    public $model;                       //绑定模型
-    public $attribute;                   //绑定字段名
-    public $uploadPath = '';             //上传地址
-    public $label = "";                  //绑定字段的label
-    public $width = 96;                  //宽度
-    public $height = 96;                 //高度
+    public $model;                      //绑定模型
+    public $attribute;                  //绑定字段名
+    public $uploadPath = '';            //上传地址
+    public $label = "";                 //绑定字段的label
+    public $width = 96;                 //宽度
+    public $height = 96;                //高度
+    public $basePath = "";              //基础路径
     public $template = '{input}';
     //public $template = '<div class="form-group">{label}{input}</div>';
     //变量
@@ -58,7 +59,7 @@ class FileInput extends Widget
             'role'=>'file-input',
             'data-width'=>$this->width,
             'data-height'=>$this->height,
-            'data-base-url'=>\yii\helpers\Url::to('@web',true),
+            'data-base-url'=>empty($this->basePath)?\yii\helpers\Url::to('@web',true):$this->basePath,
             'data-upload-url'=>$this->uploadPath
         ];
 

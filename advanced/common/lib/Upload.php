@@ -27,13 +27,14 @@ class Upload{
         $ext = end($temp);                                                  //获取文件后缀名
         $name = ($name?$name:uniqid()).".".$ext;                            //文件名
         $filename = "$dirpath/$name";                                       //文件路径名
+        $srcpath = "$datepath/$name";                                       //生成相对路径
 
         //保存文件
         if (!file_exists($filename))
             move_uploaded_file($upfile["tmp_name"], $filename);
 
         //返回数据
-        return $filename;
+        return [$filename,$srcpath];
     }
 
     /**
@@ -63,12 +64,13 @@ class Upload{
         //设置文件名
         $name = ($name?$name:uniqid()).".".$ext;                            //文件名
         $filename = "$dirpath/$name";                                       //文件路径名
+        $srcpath = "$datepath/$name";                                       //生成相对路径
 
         //保存图片,并输出结果
         if (file_put_contents($filename, $data)) {
-            return $filename;
+            return [$filename,$srcpath];
         } else {
-            return null;
+            return [null,null];
         }
     }
 
