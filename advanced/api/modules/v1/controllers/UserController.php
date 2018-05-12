@@ -273,7 +273,7 @@ class UserController extends ActiveController
      * @apiSuccess (返回参数) {Number} user_id      用户ID
      * @apiSuccess (返回参数) {String} nickname     昵称
      * @apiSuccess (返回参数) {String} picture      头像
-     * @apiSuccess (返回参数) {Number} phone        电话
+     * @apiSuccess (返回参数) {String} phone        电话
      *
      *
      * @apiSuccessExample 成功返回:
@@ -310,7 +310,7 @@ class UserController extends ActiveController
 
     /**
      * 修改信息
-     * @api {post} /v1/user/info/<id> 修改信息
+     * @api {put} /v1/user/info/<id> 修改信息
      * @apiName info-update
      * @apiDescription 修改信息
      * @apiGroup User
@@ -318,15 +318,15 @@ class UserController extends ActiveController
      *
      * @apiHeader (Http Headers) Content-Type application/x-www-form-urlencoded
      *
-     * @apiParam (请求参数) {Number} nickname       昵称
-     * @apiParam (请求参数) {Number} picture        头像
-     * @apiParam (请求参数) {Number} phone          电话
+     * @apiParam (请求参数) {String} nickname       昵称
+     * @apiParam (请求参数) {String} picture        头像
+     * @apiParam (请求参数) {String} phone          电话
      *
      * @apiSuccess (返回参数) {Number} id           ID
      * @apiSuccess (返回参数) {Number} user_id      用户ID
      * @apiSuccess (返回参数) {String} nickname     昵称
      * @apiSuccess (返回参数) {String} picture      头像
-     * @apiSuccess (返回参数) {Number} phone        电话
+     * @apiSuccess (返回参数) {String} phone        电话
      *
      *
      * @apiSuccessExample 成功返回:

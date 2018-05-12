@@ -79,7 +79,7 @@ return [
                     'controller' => ['v1/user'],
                     'extraPatterns' => [
                         'GET info/<id:\d+>' => 'info',
-                        'POST info/<id:\d+>' => 'info-update'
+                        'PUT info/<id:\d+>' => 'info-update'
                     ],
 
                 ]
