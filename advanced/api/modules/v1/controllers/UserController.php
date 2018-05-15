@@ -10,6 +10,42 @@ use yii\web\ServerErrorHttpException;
 use common\models\user\User;
 use common\models\user\SignupForm;
 
+/**
+ * @SWG\Swagger(
+ *     host="localhost/yii-admin2/advanced/api/web",
+ *     schemes={"http"},
+ *     consumes={"application/json"},
+ *     produces={"application/json"},
+ * ),
+ * @SWG\Info(version="1.0",title="用户接口",description="用户相关接口"),
+ */
+
+/**
+ * @SWG\Definition(
+ *     definition="User",
+ *     @SWG\Property(property="id",description="ID",type="string"),
+ *     @SWG\Property(property="username",description="用户名",type="string"),
+ *     @SWG\Property(property="auth_key",description="授权秘钥",type="string"),
+ *     @SWG\Property(property="email",description="邮箱",type="string"),
+ *     @SWG\Property(property="created_at",description="创建时间（时间戳）",type="integer"),
+ *     @SWG\Property(property="updated_at",description="更新时间（时间戳）",type="integer"),
+ * )
+ */
+
+/**
+ * @SWG\Definition(
+ *     definition="UserInfo",
+ *     @SWG\Property(property="id",description="ID",type="string"),
+ *     @SWG\Property(property="user_id",description="用户ID",type="string"),
+ *     @SWG\Property(property="nickname",description="用户昵称",type="string"),
+ *     @SWG\Property(property="picture",description="用户头像",type="string"),
+ *     @SWG\Property(property="phone",description="用户电话",type="string"),
+ * )
+ */
+
+/**
+ * @SWG\Tag(name="User",description="用户模块")
+ */
 class UserController extends ActiveController
 {
     public $modelClass = 'common\models\user\User';
@@ -30,221 +66,93 @@ class UserController extends ActiveController
 
     /**
      * 用户列表
-     * @api {get} /v1/user 用户列表
-     * @apiName list
-     * @apiDescription 用户列表
-     * @apiGroup User
-     * @apiVersion 1.0.0
-     *
-     * @apiSuccess (返回参数) {Number} id           ID
-     * @apiSuccess (返回参数) {String} username     用户名
-     * @apiSuccess (返回参数) {String} email        邮箱
-     * @apiSuccess (返回参数) {Number} created_at   创建时间（时间戳）
-     * @apiSuccess (返回参数) {Number} created_at   更新时间（时间戳）
-     *
-     *
-     * @apiSuccessExample 成功返回:
-     * {
-     *      "state":{
-     *          "code":0,
-     *          "massage":""
-     *      },
-     *      "data":[
-     *          {
-     *              "id": 1,
-     *              "username": "user",
-     *              "auth_key": "wD6zTurnBHhA4Z3mCYW0YDg2ydJkfPWy",
-     *              "password_hash": "$2y$13$h7N0xwgbNWVxLdLmXbVRkO5uCaccjBehHjppTNqAqmPCnDi/1.0UK",
-     *              "password_reset_token": null,
-     *              "email": "user@yii.com",
-     *              "status": 10,
-     *              "created_at": 1524535976,
-     *              "updated_at": 1524535976
-     *          },
-     *          {
-     *              "id": 2,
-     *              "username": "user2",
-     *              "auth_key": "zFDjF_SSeQYc6eY7fEaGDFXcZBCDnse8",
-     *              "password_hash": "$2y$13$5YLa.bYAihZi6uW0LSI.fOQBcWPksCnAMhdOngd7Xx6uapGqbtH4u",
-     *              "password_reset_token": null,
-     *              "email": "user2@yii.com",
-     *              "status": 10,
-     *              "created_at": 1524552822,
-     *              "updated_at": 1524552822
-     *           }
-     *      ]
-     * }
-     *
-     * @apiErrorExample 失败返回:
-     * {
-     *      "state":{
-     *          "code":500,
-     *          "massage":"fail."
-     *      },
-     *      "data":null
-     * }
-     *
+     * @SWG\GET(
+     *     path="/v1/user",
+     *     tags={"User"},
+     *     summary="用户列表",
+     *     description="",
+     *     consumes={"application/json"},
+     *     produces={"application/json"},
+     *     @SWG\Response(
+     *          response="list",
+     *          description="用户列表",
+     *          @SWG\Schema(
+     *              type="array",
+     *              @SWG\Items(ref="#/definitions/User")
+     *          )
+     *     )
+     * )
      */
 
     /**
      * 修改状态
-     * @api {put} /v1/user/<id> 修改状态
-     * @apiName update
-     * @apiDescription 修改状态
-     * @apiGroup User
-     * @apiVersion 1.0.0
-     *
-     * @apiHeader (Http Headers) Content-Type application/x-www-form-urlencoded
-     *
-     * @apiParam (请求参数) {Number} status 用户状态（可选）[10：正常状态 | 0：软删除]
-     *
-     * @apiSuccess (返回参数) {Number} id           ID
-     * @apiSuccess (返回参数) {String} username     用户名
-     * @apiSuccess (返回参数) {String} email        邮箱
-     * @apiSuccess (返回参数) {Number} created_at   创建时间（时间戳）
-     * @apiSuccess (返回参数) {Number} created_at   更新时间（时间戳）
-     *
-     *
-     * @apiSuccessExample 成功返回:
-     * {
-     *      "state":{
-     *          "code":0,
-     *          "massage":""
-     *      },
-     *      "data":{
-     *          "id":1,
-     *          "username":"user",
-     *          "auth_key":"wD6zTurnBHhA4Z3mCYW0YDg2ydJkfPWy",
-     *          "password_hash":"$2y$13$lNEtmErZ5xSDZbNQPBAqk.efwqOSqQjgVGyGumztIJEwoYYMme7RG",
-     *          "password_reset_token":null,
-     *          "email":"user@yii.com",
-     *          "status":10,
-     *          "created_at":1524535976,
-     *          "updated_at":1525741342
-     *      }
-     * }
-     *
-     * @apiErrorExample 失败返回:
-     * {
-     *      "state":{
-     *          "code":500,
-     *          "massage":"fail."
-     *      },
-     *      "data":null
-     * }
-     *
+     * @SWG\PUT(
+     *     path="/v1/user/{id}",
+     *     tags={"User"},
+     *     summary="修改状态",
+     *     description="修改账号信息，当前只能修改用户状态",
+     *     consumes={"application/x-www-form-urlencoded"},
+     *     produces={"application/json"},
+     *     @SWG\Parameter(name="id",type="integer", required=true, in="path",description="用户ID"),
+     *     @SWG\Parameter(name="status",type="integer", required=true, in="path",description="用户状态",enum={10, 0}),
+     *     @SWG\Response(
+     *          response="user",
+     *          description="修改后的账号信息",
+     *          @SWG\Schema(ref="#/definitions/User")
+     *     )
+     * )
      */
 
     /**
-     * 用户概要
-     * @api {get} /v1/user/<id> 用户概要
-     * @apiName view
-     * @apiDescription 用户概要
-     * @apiGroup User
-     * @apiVersion 1.0.0
-     *
-     * @apiSuccess (返回参数) {Number} id ID
-     * @apiSuccess (返回参数) {String} username 用户名
-     * @apiSuccess (返回参数) {String} email 邮箱
-     * @apiSuccess (返回参数) {Number} created_at 创建时间（时间戳）
-     * @apiSuccess (返回参数) {Number} created_at 更新时间（时间戳）
-     *
-     *
-     * @apiSuccessExample 成功返回:
-     * {
-     *      "state":{
-     *          "code":0,
-     *          "massage":""
-     *      },
-     *      "data":{
-     *          "id":1,
-     *          "username":"user",
-     *          "auth_key":"wD6zTurnBHhA4Z3mCYW0YDg2ydJkfPWy",
-     *          "password_hash":"$2y$13$h7N0xwgbNWVxLdLmXbVRkO5uCaccjBehHjppTNqAqmPCnDi/1.0UK",
-     *          "password_reset_token":null,
-     *          "email":"user@yii.com",
-     *          "status":10,
-     *          "created_at":1524535976,
-     *          "updated_at":1524535976
-     *      }
-     * }
-     *
-     * @apiErrorExample 失败返回:
-     * {
-     *      "state":{
-     *          "code":500,
-     *          "massage":"fail."
-     *      },
-     *      "data":null
-     * }
-     *
+     * 账号信息
+     * @SWG\GET(
+     *     path="/v1/user/{id}",
+     *     tags={"User"},
+     *     summary="账号信息",
+     *     description="获取用户账号信息",
+     *     consumes={"application/json"},
+     *     produces={"application/json"},
+     *     @SWG\Parameter(name="id",type="integer", required=true, in="path",description="用户ID"),
+     *     @SWG\Response(
+     *          response="user",
+     *          description="用户账号信息",
+     *          @SWG\Schema(ref="#/definitions/User")
+     *     )
+     * )
      */
 
     /**
-     * 删除用户
-     * @api {delete} /v1/user/<id> 删除用户
-     * @apiName delete
-     * @apiDescription 删除用户
-     * @apiGroup User
-     * @apiVersion 1.0.0
-     *
-     *
-     * @apiSuccessExample 成功返回:
-     * {
-     *      "state":{
-     *          "code":0,
-     *          "massage":""
-     *      },
-     *      "data":null
-     * }
-     *
-     * @apiErrorExample 失败返回:
-     * {
-     *      "state":{
-     *          "code":500,
-     *          "massage":"fail."
-     *      },
-     *      "data":null
-     * }
-     *
+     * 删除账号
+     * @SWG\DELETE(
+     *     path="/v1/user/{id}",
+     *     tags={"User"},
+     *     summary="删除账号",
+     *     description="",
+     *     consumes={"application/json"},
+     *     produces={"application/json"},
+     *     @SWG\Parameter(name="id",type="integer", required=true, in="path",description="用户ID"),
+     *     @SWG\Response()
+     * )
      */
 
     /**
      * 注册用户
-     * @api {post} /v1/user/signup 注册用户
-     * @apiName signup
-     * @apiDescription 注册用户
-     * @apiGroup User
-     * @apiVersion 1.0.0
-     *
-     * @apiHeader (Http Headers) Content-Type application/x-www-form-urlencoded
-     *
-     * @apiParam (请求参数) {String} username   用户名
-     * @apiParam (请求参数) {String} password   密码
-     * @apiParam (请求参数) {String} email      邮箱
-     *
-     * @apiSuccessExample 成功返回:
-     * {
-     *      "state":{
-     *          "code":0,
-     *          "massage":""
-     *      },
-     *      "data":{
-     *          "username":"user",
-     *          "email":"user@yii.com",
-     *          "password":"123456"
-     *      }
-     * }
-     *
-     * @apiErrorExample 失败返回:
-     * {
-     *      "state":{
-     *          "code":400,
-     *          "massage":'{"username":["This username has already been taken."],"email":["This email address has already been taken."]}'
-     *      },
-     *      "data":null
-     * }
-     *
+     * @SWG\POST(
+     *     path="/v1/user/signup",
+     *     tags={"User"},
+     *     summary="注册用户",
+     *     description="",
+     *     consumes={"application/x-www-form-urlencoded"},
+     *     produces={"application/json"},
+     *     @SWG\Parameter(name="username",type="string", required=true, in="formData",description="用户名"),
+     *     @SWG\Parameter(name="password",type="string", required=true, in="formData",description="密码"),
+     *     @SWG\Parameter(name="email",type="string", required=true, in="formData",description="邮箱"),
+     *     @SWG\Response(
+     *          response="200",
+     *          description="用户账号信息",
+     *          @SWG\Schema(ref="#/definitions/User")
+     *     )
+     * )
      */
     public function actionSignup(){
         $model = new SignupForm();
@@ -263,42 +171,20 @@ class UserController extends ActiveController
 
     /**
      * 用户信息
-     * @api {get} /v1/user/info/<id> 用户信息
-     * @apiName info
-     * @apiDescription 用户信息
-     * @apiGroup User
-     * @apiVersion 1.0.0
-     *
-     * @apiSuccess (返回参数) {Number} id           ID
-     * @apiSuccess (返回参数) {Number} user_id      用户ID
-     * @apiSuccess (返回参数) {String} nickname     昵称
-     * @apiSuccess (返回参数) {String} picture      头像
-     * @apiSuccess (返回参数) {String} phone        电话
-     *
-     *
-     * @apiSuccessExample 成功返回:
-     * {
-     *      "state":{
-     *          "code":0,
-     *          "massage":""
-     *      },
-     *      "data":{
-     *          "id":1,
-     *          "user_id":1,
-     *          "nickname":"用户",
-     *          "picture":"upload/20180429/5ae5960d337fb.jpeg",
-     *          "phone":"123456"}
-     * }
-     *
-     * @apiErrorExample 失败返回:
-     * {
-     *      "state":{
-     *          "code":500,
-     *          "massage":"fail."
-     *      },
-     *      "data":null
-     * }
-     *
+     * @SWG\GET(
+     *     path="/v1/user/info/{id}",
+     *     tags={"User"},
+     *     summary="用户信息",
+     *     description="获取用户信息",
+     *     consumes={"application/json"},
+     *     produces={"application/json"},
+     *     @SWG\Parameter(name="id",type="integer", required=true, in="path",description="用户ID"),
+     *     @SWG\Response(
+     *          response="info",
+     *          description="用户信息",
+     *          @SWG\Schema(ref="#/definitions/UserInfo")
+     *     )
+     * )
      */
     public function actionInfo($id){
         $model = User::findOne($id);
@@ -310,49 +196,23 @@ class UserController extends ActiveController
 
     /**
      * 修改信息
-     * @api {put} /v1/user/info/<id> 修改信息
-     * @apiName info-update
-     * @apiDescription 修改信息
-     * @apiGroup User
-     * @apiVersion 1.0.0
-     *
-     * @apiHeader (Http Headers) Content-Type application/x-www-form-urlencoded
-     *
-     * @apiParam (请求参数) {String} nickname       昵称
-     * @apiParam (请求参数) {String} picture        头像
-     * @apiParam (请求参数) {String} phone          电话
-     *
-     * @apiSuccess (返回参数) {Number} id           ID
-     * @apiSuccess (返回参数) {Number} user_id      用户ID
-     * @apiSuccess (返回参数) {String} nickname     昵称
-     * @apiSuccess (返回参数) {String} picture      头像
-     * @apiSuccess (返回参数) {String} phone        电话
-     *
-     *
-     * @apiSuccessExample 成功返回:
-     * {
-     *      "state":{
-     *          "code":0,
-     *          "massage":""
-     *      },
-     *      "data":{
-     *          "id":1,
-     *          "user_id":1,
-     *          "nickname":"用户",
-     *          "picture":"upload/20180429/5ae5960d337fb.jpeg",
-     *          "phone":"123456"
-     *      }
-     * }
-     *
-     * @apiErrorExample 失败返回:
-     * {
-     *      "state":{
-     *          "code":500,
-     *          "massage":"fail."
-     *      },
-     *      "data":null
-     * }
-     *
+     * @SWG\PUT(
+     *     path="/v1/user/info/{id}",
+     *     tags={"User"},
+     *     summary="修改信息",
+     *     description="修改账号信息",
+     *     consumes={"application/x-www-form-urlencoded"},
+     *     produces={"application/json"},
+     *     @SWG\Parameter(name="id",type="integer", required=true, in="path",description="用户ID"),
+     *     @SWG\Parameter(name="nickname",type="string", required=false, in="formData",description="用户昵称"),
+     *     @SWG\Parameter(name="picture",type="string", required=false, in="formData",description="用户头像"),
+     *     @SWG\Parameter(name="phone",type="string", required=false, in="formData",description="用户电话"),
+     *     @SWG\Response(
+     *          response="info",
+     *          description="修改后的用户信息",
+     *          @SWG\Schema(ref="#/definitions/UserInfo")
+     *     )
+     * )
      */
     public function actionInfoUpdate($id){
         $user = User::findOne($id);
