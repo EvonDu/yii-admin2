@@ -94,7 +94,7 @@ class UserController extends ActiveController
      *     consumes={"application/x-www-form-urlencoded"},
      *     produces={"application/json"},
      *     @SWG\Parameter(name="id",type="integer", required=true, in="path",description="用户ID"),
-     *     @SWG\Parameter(name="status",type="integer", required=true, in="path",description="用户状态",enum={10, 0}),
+     *     @SWG\Parameter(name="status",type="integer", required=true, in="formData",description="用户状态",enum={10, 0}),
      *     @SWG\Response(
      *          response="user",
      *          description="修改后的账号信息",
