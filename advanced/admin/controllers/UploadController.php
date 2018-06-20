@@ -8,6 +8,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\helpers\Url;
+use layui\LayHelper;
 
 /**
  * OptionController implements the CRUD actions for Option model.
@@ -84,5 +85,21 @@ class UploadController extends Controller
         $response->headers->set('Content-Type', mime_content_type($fullname));
         $response->format = yii\web\Response::FORMAT_RAW;
         $response->stream = fopen($fullname, 'r');
+    }
+
+    /**
+     * Lay用的图片上传接口
+     */
+    public function actionLay(){
+        if (isset($_FILES['file'])) {
+            $file = $_FILES['file'];
+            list($path,$src) = Upload::upload_file($file,$this->uploadPath());
+            $url = Url::to(["get","src"=>$src]);
+            $data = ["src"=>$url,"title"=>"image"];
+            LayHelper::sentLayApiResult(0,"",$data);
+        }
+        else{
+            LayHelper::sentLayApiResult(0,"image could not be saved.",null);
+        }
     }
 }
