@@ -3,6 +3,7 @@ namespace layui\widgets;
 
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
+use layui\field\Edit;
 use layui\field\Other;
 
 class ActiveField extends \yii\widgets\ActiveField {
@@ -119,6 +120,15 @@ class ActiveField extends \yii\widgets\ActiveField {
         $submit = Html::submitButton("提交",array_merge(["class"=>"layui-btn"],$options));
         $reset = Html::button("重置",["class"=>"layui-btn layui-btn-primary"]);
         $this->parts['{input}'] = "$submit\n$reset";
+        return $this;
+    }
+
+    public function edit($options = []){
+        $options = array_merge([
+            'model' => $this->model,
+            'attribute' => $this->attribute,
+        ],$options);
+        $this->parts['{input}'] = Edit::widget($options);
         return $this;
     }
 

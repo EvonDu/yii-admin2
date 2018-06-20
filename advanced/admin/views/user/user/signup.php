@@ -13,7 +13,7 @@ $this->title = '用户注册';
 $this->params['breadcrumbs'][] = ['label' => '用户管理', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-signup row">
+<div class="site-signup">
 
     <?php Card::begin(["title"=>Html::encode($this->title),"icon"=>"&#xe654;"])?>
 

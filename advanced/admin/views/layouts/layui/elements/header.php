@@ -16,17 +16,17 @@ use yii\helpers\Html;
             </div>
         </div>
         <ul class="layui-nav admin-header-item">
-            <li class="layui-nav-item">
-                <a href="javascript:;">清除缓存</a>
+            <li class="layui-nav-item" id="video1">
+                <a href="javascript:;">百度搜索</a>
             </li>
             <li class="layui-nav-item" id="pay">
-                <a href="javascript:;">捐赠我</a>
+                <a href="javascript:;">通知信息</a>
             </li>
             <li class="layui-nav-item">
                 <a href="javascript:;">浏览网站</a>
             </li>
-            <li class="layui-nav-item" id="video1">
-                <a href="javascript:;">百度</a>
+            <li class="layui-nav-item">
+                <a href="javascript:;">清除缓存</a>
             </li>
             <?php if (!Yii::$app->user->isGuest):?>
                 <li class="layui-nav-item">
