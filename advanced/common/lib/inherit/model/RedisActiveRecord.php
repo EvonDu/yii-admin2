@@ -24,7 +24,7 @@ class RedisActiveRecord extends \yii\db\ActiveRecord
     public static function find()
     {
         $class = get_called_class();
-        if($class::$enableRedis)
+        if($class::$enableRedis && isset(Yii::$app->redis))
             return Yii::createObject(RedisActiveQuery::className(), [get_called_class()]);
         else
             return parent::find();
@@ -61,6 +61,10 @@ class RedisActiveRecord extends \yii\db\ActiveRecord
      * @param bool $insert
      */
     public function afterRedis($insert = false){
+        //判断是否有Redis对象
+        if(!isset(Yii::$app->redis))
+            return;
+
         //获取信息
         $appid = Yii::$app->id;
         $class = get_called_class();

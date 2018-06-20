@@ -36,8 +36,7 @@ class RedisActiveQuery extends \yii\db\ActiveQuery
         return $result;
     }
 
-    public function one($db = null)
-    {
+    public function one($db = null){
         //尝试使用主键的方式进行查询
         $keyResult = $this->key($db);
         if($keyResult)
