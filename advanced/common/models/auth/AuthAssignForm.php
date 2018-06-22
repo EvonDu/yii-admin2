@@ -31,6 +31,22 @@ class AuthAssignForm extends Model
     }
 
     /**
+     * @param array $data
+     * @param null $formName
+     * @return bool
+     */
+    public function load($data, $formName = null)
+    {
+        //处理auths，防止清空分配的发生load返回false情况
+        $scope = $formName === null ? $this->formName() : $formName;
+        if($data && !isset($data[$scope]["auths"])){
+            $data[$scope]["auths"] = [];
+        }
+        //调用父函数
+        return parent::load($data, $formName);
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function rules()

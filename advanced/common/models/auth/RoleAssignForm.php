@@ -15,8 +15,8 @@ class RoleAssignForm extends Model
     private $list;
 
     /**
-     * AuthAssignForm constructor.
-     * @param array $role_id
+     * RoleAssignForm constructor.
+     * @param array $id
      * @param array $config
      */
     public function __construct($id, array $config = [])
@@ -28,6 +28,22 @@ class RoleAssignForm extends Model
         $this->roles = ArrayHelper::getColumn($search, 'item_name');
 
         parent::__construct($config);
+    }
+
+    /**
+     * @param array $data
+     * @param null $formName
+     * @return bool
+     */
+    public function load($data, $formName = null)
+    {
+        //处roles，防止清空分配的发生load返回false情况
+        $scope = $formName === null ? $this->formName() : $formName;
+        if($data && !isset($data[$scope]["roles"])){
+            $data[$scope]["roles"] = [];
+        }
+        //调用父函数
+        return parent::load($data, $formName);
     }
 
     /**
