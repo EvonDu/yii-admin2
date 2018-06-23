@@ -38,7 +38,10 @@ class ActiveField extends \yii\widgets\ActiveField {
         $id = Html::getInputId($this->model, $this->attribute);
         $value = Html::getAttributeValue($this->model,$this->attribute);
 
-        //设置属性
+        //设置hidden
+        $hidden = Html::tag("input","",['name'=>$name,'value'=>0,'type'=>'hidden']);
+
+        //设置checkbox
         $options = array_merge([
             'id'=>$id,
             'name'=>$name,
@@ -49,9 +52,10 @@ class ActiveField extends \yii\widgets\ActiveField {
             $options["checked"]="";
         if(!isset($options["title"]))
             $options["title"] = "ON";
+        $checkbox = Html::tag("input","",$options);
 
         //返回
-        $this->parts['{input}'] = Html::tag("input","",$options);
+        $this->parts['{input}'] = $hidden.$checkbox;
         return $this;
     }
 
