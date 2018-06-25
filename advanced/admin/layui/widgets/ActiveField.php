@@ -4,6 +4,8 @@ namespace layui\widgets;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use layui\field\Edit;
+use layui\field\FileInput;
+use layui\field\ImageInput;
 use layui\field\Other;
 
 class ActiveField extends \yii\widgets\ActiveField {
@@ -133,6 +135,24 @@ class ActiveField extends \yii\widgets\ActiveField {
             'attribute' => $this->attribute,
         ],$options);
         $this->parts['{input}'] = Edit::widget($options);
+        return $this;
+    }
+
+    public function fileInput($options = []){
+        $options = array_merge([
+            'model' => $this->model,
+            'attribute' => $this->attribute,
+        ],$options);
+        $this->parts['{input}'] = FileInput::widget($options);
+        return $this;
+    }
+
+    public function imageInput($options = []){
+        $options = array_merge([
+            'model' => $this->model,
+            'attribute' => $this->attribute,
+        ],$options);
+        $this->parts['{input}'] = ImageInput::widget($options);
         return $this;
     }
 
