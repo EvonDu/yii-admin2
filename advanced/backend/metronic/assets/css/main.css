@@ -9,3 +9,7 @@
 .page-header.navbar .page-logo .logo-default{
     /*margin:0px;*/
 }
+
+.modal-body .form-group.row{
+    margin: 0;
+}

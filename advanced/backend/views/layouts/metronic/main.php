@@ -9,7 +9,7 @@ AppAsset::register($this);
 metronic\MetronicAsset::register($this);
 
 //设置菜单
-require Yii::getAlias('@backend')."/nav/nav.php";
+require Yii::getAlias('@backend')."/nav/Nav.php";
 $menuItems=backend\nav\Nav::GetItems();
 ?>
 
