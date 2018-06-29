@@ -39,6 +39,7 @@ return [
                     $data = null;
                 }
                 //自定义返回结构
+                $response->statusCode = 200;
                 $response->data = [
                     'state' =>  [
                         'code' => $code,
