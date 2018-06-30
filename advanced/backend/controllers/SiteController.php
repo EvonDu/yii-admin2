@@ -7,6 +7,9 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\admin\LoginForm;
 use common\models\admin\ChangePasswordForm;
+use common\models\admin\AdminSearch;
+use common\models\auth\AuthItemSearch;
+use common\models\user\UserSearch;
 
 /**
  * Site controller
@@ -27,7 +30,7 @@ class SiteController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'index', 'change-password'],
+                        'actions' => ['home', 'logout', 'index', 'change-password'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -119,5 +122,29 @@ class SiteController extends Controller
                 'model' => $model,
             ]);
         }
+    }
+
+    /**
+     * Displays homepage.
+     *
+     * @return string
+     */
+    public function actionHome()
+    {
+        $data = [];
+
+        $searchModel = new AdminSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $data["admin_count"] = $dataProvider->totalCount;
+        $searchModel = new UserSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $data["user_count"] = $dataProvider->totalCount;
+        $searchModel = new AuthItemSearch();
+        $dataProvider = $searchModel->search_role(Yii::$app->request->queryParams);
+        $data["role_count"] = $dataProvider->totalCount;
+        $dataProvider = $searchModel->search_auth(Yii::$app->request->queryParams);
+        $data["auth_count"] = $dataProvider->totalCount;
+
+        return $this->render('home',["data"=>$data]);
     }
 }

@@ -125,7 +125,6 @@ class SiteController extends Controller
         $dataProvider = $searchModel->search_auth(Yii::$app->request->queryParams);
         $data["auth_count"] = $dataProvider->totalCount;
 
-
         return $this->render('home',["data"=>$data]);
     }
 

@@ -34,7 +34,7 @@ use yii\helpers\Url;
                 </a>
                 <ul class="sub-menu">
                     <li class="nav-item start ">
-                        <a href="<?=Url::to(['site/index'])?>" class="nav-link ">
+                        <a href="<?=Url::to(['site/home'])?>" class="nav-link ">
                             <i class="icon-home"></i>
                             <span class="title">首页</span>
                         </a>
