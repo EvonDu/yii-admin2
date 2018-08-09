@@ -7,18 +7,9 @@ use yii\helpers\ArrayHelper;
 use yii\web\NotFoundHttpException;
 use yii\web\BadRequestHttpException;
 use yii\web\ServerErrorHttpException;
+use api\lib\ModelErrors;
 use common\models\user\User;
 use common\models\user\SignupForm;
-
-/**
- * @SWG\Swagger(
- *     host="localhost/yii-admin2/advanced/api/web",
- *     schemes={"http"},
- *     consumes={"application/json"},
- *     produces={"application/json"},
- * ),
- * @SWG\Info(version="1.0",title="用户接口",description="用户相关接口"),
- */
 
 /**
  * @SWG\Definition(
@@ -161,7 +152,7 @@ class UserController extends ActiveController
 
         //参数检测
         if(!$model->validate())
-            throw new BadRequestHttpException(json_encode($model->errors));
+            throw new BadRequestHttpException(ModelErrors::getError($model));
 
         //保存
         if ($model->signup())
@@ -222,7 +213,7 @@ class UserController extends ActiveController
 
         //参数检测
         if(!$model->validate())
-            throw new BadRequestHttpException(json_encode($model->errors));
+            throw new BadRequestHttpException(ModelErrors::getError($model));
 
         //保存
         if ($model->save())
